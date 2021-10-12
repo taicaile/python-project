@@ -1,0 +1,9 @@
+
+# mypy global options:
+[tool.mypy]
+show_column_numbers = true
+show_error_context = false
+ignore_missing_imports = true
+
+[tool.isort]
+profile = "black"
