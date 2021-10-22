@@ -16,6 +16,7 @@ BASHRC=~/.bashrc
 DIRENV_HOOK_LINE="eval \"$(direnv hook bash)\""
 grep -qF -- "$DIRENV_HOOK_LINE" "$BASHRC" || {
     echo "$DIRENV_HOOK_LINE" >>"$BASHRC"
+    # shellcheck disable=SC1090
     source $BASHRC
 }
 
