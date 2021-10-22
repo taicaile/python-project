@@ -6,8 +6,7 @@
 
 # Check if direnv is installed, try to install direnv if not installed yet
 DIRENV=direnv
-apt -qq list $DIRENV 2>/dev/null | grep -qE "(installed|upgradeable)" || apt -qq install $DIRENV || echo "Pelase install $DIRENV manually."
-exit 1
+apt -qq list $DIRENV 2>/dev/null | grep -qE "(installed|upgradeable)" || apt -qq install $DIRENV || echo "Pelase install $DIRENV manually." && exit 1
 
 # check ~/.bashrc
 BASHRC=~/.bashrc
