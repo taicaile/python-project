@@ -30,7 +30,7 @@ for FILE in "${FILES[@]}"; do
 done
 
 # init repo
-if [ -d .git ]; then
+if [ ! -d .git ]; then
   git init
 fi
 
