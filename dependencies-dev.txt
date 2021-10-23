@@ -1,7 +1,0 @@
-pip
-wheel
-pylint
-isort
-mypy
-black
-pre-commit

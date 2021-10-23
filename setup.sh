@@ -22,12 +22,15 @@ grep -qF -- "$DIRENV_HOOK_LINE" "$BASHRC" || {
 
 # download .envrc file
 ENVRC=.envrc
-if [[ ! -f "$ENVRC" ]]; then
-    ENVRC_URL=https://raw.githubusercontent.com/taicaile/pyproject/master/.envrc
-    wget -O $ENVRC $ENVRC_URL || {
-        echo "download failed, kindly check your network or the link: $ENVRC_URL"
-        exit 1
-    }
-fi
+declare -a FILES=(".envrc" ".pre-commit-config.yaml" "pyproject.toml")
+for FILE in "${FILES[@]}"; do
+    if [[ ! -f "$FILE" ]]; then
+        ENVRC_URL=https://raw.githubusercontent.com/taicaile/pyproject/master/$FILE
+        wget -O "$ENVRC $ENVRC_URL" || {
+            echo "download failed, kindly check your network or the link: $ENVRC_URL"
+            exit 1
+        }
+    fi
+done
 
 direnv allow
