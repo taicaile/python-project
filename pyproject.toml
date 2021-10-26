@@ -11,9 +11,7 @@ profile = "black"
 
 # pylint global options
 [tool.pylint."MESSAGES CONTROL"]
-disable=[
-    "fixme"
-]
+disable = ["fixme"]
 
 [tool.pylint.TYPECHECK]
-generated-members='numpy.*, torch.*'
+generated-members = 'numpy.*, torch.*'
