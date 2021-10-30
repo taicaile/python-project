@@ -19,3 +19,6 @@ site/
 
 # mypy
 .mypy_cache/
+
+# vscode remote
+.devcontainer
