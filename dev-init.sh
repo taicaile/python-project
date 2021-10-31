@@ -21,22 +21,34 @@ fi
 
 # -------------------------
 info "update && upgrade"
-apt -qq update && apt -qq upgrade -y
+apt -q update && apt -q upgrade -y
 
 # -------------------------
 info "install common libraries"
-apt -qq install -y \
+apt -q install -y --no-install-recommends \
     sudo \
     curl \
     git \
     tmux \
     nano \
     htop \
-    neofetch
+    neofetch \
+    direnv
 
 # -------------------------
-info "install oh my bash"
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
+USER_HOME=/home/"${SUDO_USER:-$USER}"
+BASHRC=$USER_HOME/.bashrc
+INIT_SH_PATH="$USER_HOME/init.sh"
+wget https://raw.githubusercontent.com/taicaile/init.sh/master/init.sh -O  "$INIT_SH_PATH"
+
+# append this
+
+INIT_HOOK_LINE="source $INIT_SH_PATH"
+grep -qF -- "$INIT_HOOK_LINE" "$BASHRC" || {
+    echo "$INIT_HOOK_LINE" >>"$BASHRC"
+    # shellcheck disable=SC1090
+    source "$BASHRC"
+}
 
 # -------------------------
 info "The following versions of Python are installed in this machine:"
