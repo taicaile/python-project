@@ -36,8 +36,19 @@ apt -q install -y --no-install-recommends \
     direnv
 
 # -------------------------
-USER_HOME=/home/"${SUDO_USER:-$USER}"
+USER_NAME="${SUDO_USER:-$USER}"
+USER_HOME=/home/$USER_NAME
 BASHRC=$USER_HOME/.bashrc
+echo "user name: $USER_NAME"
+echo "user home: $USER_HOME"
+echo ".bashrc: $BASHRC"
+
+if [[ ! -f "$BASHRC" ]]; then
+    echo "$BASHRC does not exists."
+    echo "exit..."
+    exit 1
+fi
+
 INIT_SH_PATH="$USER_HOME/init.sh"
 wget https://raw.githubusercontent.com/taicaile/init.sh/master/init.sh -O  "$INIT_SH_PATH"
 
