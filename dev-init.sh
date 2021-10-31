@@ -21,7 +21,7 @@ fi
 
 # -------------------------
 info "update && upgrade"
-apt -q update && apt -q upgrade -y
+apt -qq update && apt -qq upgrade -y
 
 # -------------------------
 info "install common libraries"
