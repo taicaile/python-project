@@ -71,7 +71,7 @@ if [ ! -f "$USER_RC" ]; then
     exit 1
 fi
 
-INIT_SH_PATH="$USER_HOME/init.sh"
+INIT_SH_PATH="$USER_RC_PATH/init.sh"
 wget https://raw.githubusercontent.com/taicaile/init.sh/master/init.sh -O  "$INIT_SH_PATH"
 
 # append this
