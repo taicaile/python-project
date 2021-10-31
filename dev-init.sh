@@ -53,7 +53,8 @@ fi
 
 if [ "${USERNAME}" = "" ]; then
     error "Couldn't find existing user, exit..."
-    exit 1
+    info "set username as root"
+    USERNAME='root'
 fi
 
 # user .bashrc path
