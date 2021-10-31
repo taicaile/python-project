@@ -2,7 +2,7 @@
 
 # This script is used to initialize container envrionment for Python project development.
 
-set -e
+# set -e
 
 info() {
   printf '\E[32m'; echo "$@"; printf '\E[0m'
@@ -36,16 +36,37 @@ apt -q install -y --no-install-recommends \
     direnv
 
 # -------------------------
-USER_NAME="${SUDO_USER:-$USER}"
-USER_HOME=/home/$USER_NAME
-BASHRC=$USER_HOME/.bashrc
-echo "user name: $USER_NAME"
-echo "user home: $USER_HOME"
-echo ".bashrc: $BASHRC"
+# look for user
+USERNAME="automatic"
+# If in automatic mode, determine if a user already exists
+if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
+    USERNAME=""
+    POSSIBLE_USERS=("$(awk -v val=1000 -F ":" '$3==val{print $1}' /etc/passwd)")
+    for CURRENT_USER in "${POSSIBLE_USERS[@]}"; do
+        if id -u "${CURRENT_USER}" > /dev/null 2>&1; then
+            USERNAME=${CURRENT_USER}
+            info "found existing user: $USERNAME"
+            break
+        fi
+    done
+fi
 
-if [[ ! -f "$BASHRC" ]]; then
-    echo "$BASHRC does not exists."
-    echo "exit..."
+if [ "${USERNAME}" = "" ]; then
+    error "Couldn't find existing user, exit..."
+    exit 1
+fi
+
+# user .bashrc path
+if [ "${USERNAME}" = "root" ]; then
+    USER_RC_PATH="/root"
+else
+    USER_RC_PATH="/home/${USERNAME}"
+fi
+# user .bashrc
+USER_RC=$USER_RC_PATH/.bashrc
+
+if [ ! -f "$USER_RC" ]; then
+    error "$USER_RC does not exists, exit..."
     exit 1
 fi
 
@@ -55,15 +76,15 @@ wget https://raw.githubusercontent.com/taicaile/init.sh/master/init.sh -O  "$INI
 # append this
 
 INIT_HOOK_LINE="source $INIT_SH_PATH"
-grep -qF -- "$INIT_HOOK_LINE" "$BASHRC" || {
-    echo "$INIT_HOOK_LINE" >>"$BASHRC"
+grep -qF -- "$INIT_HOOK_LINE" "$USER_RC" || {
+    echo "$INIT_HOOK_LINE" >>"$USER_RC"
     # shellcheck disable=SC1090
-    source "$BASHRC"
+    source "$USER_RC"
 }
 
 # -------------------------
 info "The following versions of Python are installed in this machine:"
 for p in $(find  /usr/bin/python* | grep -P 'python[\d](.[\d])?+$')
 do
-  echo "$p" "$($p --version)"
+  info "$p" "$($p --version)"
 done
