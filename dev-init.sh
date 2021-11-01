@@ -20,8 +20,11 @@ if [[ $EUID -ne 0 ]]; then # root user
 fi
 
 # -------------------------
-info "update && upgrade"
-apt -qq update && apt -qq upgrade -y
+info "update"
+apt -qq update
+
+# info "upgrade"
+# apt -qq upgrade -y
 
 # -------------------------
 info "install common libraries"
