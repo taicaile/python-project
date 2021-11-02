@@ -36,7 +36,8 @@ apt -q install -y --no-install-recommends \
     nano \
     htop \
     neofetch \
-    direnv
+    direnv \
+    vim
 
 # -------------------------
 # look for user
