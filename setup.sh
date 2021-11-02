@@ -2,21 +2,22 @@
 
 # This script is used to setup a local environment for Python3 development
 
-# Check if direnv is installed, try to install direnv if not installed yet
-DIRENV=direnv
-apt -qq list $DIRENV 2>/dev/null | grep -qE "(installed|upgradeable)" || apt -qq install $DIRENV || {
-    echo "Pelase install $DIRENV manually."
-    exit 1
+set -e
+
+function assert_installed {
+    if ! apt -qq list "$1" --installed 2>/dev/null | grep -qE "(installed|upgradeable)";  then
+        echo " $1 is not installed, please install it, exit..."
+        exit 1
+    fi
 }
 
-# check ~/.bashrc
-BASHRC=~/.bashrc
-DIRENV_HOOK_LINE="eval \"$(direnv hook bash)\""
-grep -qF -- "$DIRENV_HOOK_LINE" "$BASHRC" || {
-    echo "$DIRENV_HOOK_LINE" >>"$BASHRC"
-    # shellcheck disable=SC1090
-    source $BASHRC
-}
+# Check if direnv is installed, try to install direnv if not installed yet
+DIRENV=direnv
+assert_installed $DIRENV
+
+# check if git is installed
+GIT=git
+assert_installed $GIT
 
 FILES=(".envrc" ".pre-commit-config.yaml" "pyproject.toml" ".gitignore")
 for FILE in "${FILES[@]}"; do

@@ -75,11 +75,11 @@ if [ ! -f "$USER_RC" ]; then
     exit 1
 fi
 
+# update .bashrc
 INIT_SH_PATH="$USER_RC_PATH/init.sh"
 wget https://raw.githubusercontent.com/taicaile/init.sh/master/init.sh -O  "$INIT_SH_PATH"
 
-# append this
-
+# append init.sh to .bashrc
 INIT_HOOK_LINE="source $INIT_SH_PATH"
 grep -qF -- "$INIT_HOOK_LINE" "$USER_RC" || {
     echo "$INIT_HOOK_LINE" >>"$USER_RC"
