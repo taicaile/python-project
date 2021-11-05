@@ -56,8 +56,7 @@ if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
 fi
 
 if [ "${USERNAME}" = "" ]; then
-    error "Couldn't find existing user, exit..."
-    info "set username as root"
+    info "Couldn't find existing user, set username as root"
     USERNAME='root'
 fi
 
