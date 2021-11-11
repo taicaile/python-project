@@ -37,3 +37,6 @@ fi
 
 # run direnv
 direnv allow
+
+# pre-commit
+pre-commit install
