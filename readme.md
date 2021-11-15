@@ -23,3 +23,9 @@ curl -sL https://raw.githubusercontent.com/taicaile/pyproject/master/dev-init.sh
 - add argument, --python 3.8, if install specific Python version
 - add prefix option for bash prompt
 ```
+
+To install markdownlint,
+
+```bash
+npm install -g markdownlint-cli
+```
