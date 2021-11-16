@@ -48,6 +48,7 @@ sudo npm install -g --quiet --no-progress markdownlint-cli
 # -------------------------
 # look for user
 USERNAME="automatic"
+USERNAME_ARRAY=("root")
 # If in automatic mode, determine if a user already exists
 if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
     USERNAME=""
@@ -56,41 +57,43 @@ if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
         if id -u "${CURRENT_USER}" > /dev/null 2>&1; then
             USERNAME=${CURRENT_USER}
             info "found existing user: $USERNAME"
-            break
+            USERNAME_ARRAY+=("$USERNAME")
         fi
     done
 fi
 
-if [ "${USERNAME}" = "" ]; then
-    info "Couldn't find existing user, set username as root"
-    USERNAME='root'
-fi
+for USERNAME in "${USERNAME_ARRAY[@]}"; do
+    if [ "${USERNAME}" = "" ]; then
+        info "Couldn't find existing user, set username as root"
+        USERNAME='root'
+    fi
 
-# user .bashrc path
-if [ "${USERNAME}" = "root" ]; then
-    USER_RC_PATH="/root"
-else
-    USER_RC_PATH="/home/${USERNAME}"
-fi
-# user .bashrc
-USER_RC=$USER_RC_PATH/.bashrc
+    # user .bashrc path
+    if [ "${USERNAME}" = "root" ]; then
+        USER_RC_PATH="/root"
+    else
+        USER_RC_PATH="/home/${USERNAME}"
+    fi
+    # user .bashrc
+    USER_RC=$USER_RC_PATH/.bashrc
 
-if [ ! -f "$USER_RC" ]; then
-    error "$USER_RC does not exists, exit..."
-    exit 1
-fi
+    if [ ! -f "$USER_RC" ]; then
+        error "$USER_RC does not exists, exit..."
+        exit 1
+    fi
 
-# update .bashrc
-INIT_SH_PATH="$USER_RC_PATH/init.sh"
-wget https://raw.githubusercontent.com/taicaile/init.sh/master/init.sh -O  "$INIT_SH_PATH"
+    # update .bashrc
+    INIT_SH_PATH="$USER_RC_PATH/init.sh"
+    wget https://raw.githubusercontent.com/taicaile/init.sh/master/init.sh -O  "$INIT_SH_PATH"
 
-# append init.sh to .bashrc
-INIT_HOOK_LINE="source $INIT_SH_PATH"
-grep -qF -- "$INIT_HOOK_LINE" "$USER_RC" || {
-    echo "$INIT_HOOK_LINE" >>"$USER_RC"
-    # shellcheck disable=SC1090
-    source "$USER_RC"
-}
+    # append init.sh to .bashrc
+    INIT_HOOK_LINE="source $INIT_SH_PATH"
+    grep -qF -- "$INIT_HOOK_LINE" "$USER_RC" || {
+        echo "$INIT_HOOK_LINE" >>"$USER_RC"
+        # shellcheck disable=SC1090
+        source "$USER_RC"
+    }
+done
 
 # -------------------------
 info "The following versions of Python are installed in this machine:"
