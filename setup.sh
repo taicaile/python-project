@@ -5,19 +5,19 @@
 set -e
 
 function assert_installed {
-    if ! apt -qq list "$1" --installed 2>/dev/null | grep -qE "(installed|upgradeable)";  then
+    # if ! apt -qq list "$1" --installed 2>/dev/null | grep -qE "(installed|upgradeable)";  then
+    if ! command -v "$1" &>/dev/null;  then
         echo " $1 is not installed, please install it, exit..."
         exit 1
     fi
 }
 
-# Check if direnv is installed, try to install direnv if not installed yet
-DIRENV=direnv
-assert_installed $DIRENV
+# Check if required programs are installed
 
-# check if git is installed
-GIT=git
-assert_installed $GIT
+PRE_INSTALLS=("direnv" "git" "markdownlint" "shellcheck" "pre-commit")
+for program in "${PRE_INSTALLS[@]}"; do
+  assert_installed "$program"
+done
 
 FILES=(".envrc" ".pre-commit-config.yaml" "pyproject.toml" ".gitignore")
 for FILE in "${FILES[@]}"; do

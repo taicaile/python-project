@@ -37,7 +37,13 @@ apt -q install -y --no-install-recommends \
     htop \
     neofetch \
     direnv \
-    vim
+    vim \
+    shellcheck \
+    npm \
+    python3.8-dev
+
+# install npm tools
+sudo npm install -g --quiet --no-progress markdownlint-cli
 
 # -------------------------
 # look for user
