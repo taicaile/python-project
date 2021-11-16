@@ -21,7 +21,7 @@ fi
 
 # -------------------------
 info "update"
-apt -qq update
+apt -q update
 
 # info "upgrade"
 # apt -qq upgrade -y
