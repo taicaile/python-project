@@ -43,7 +43,7 @@ apt -q install -y --no-install-recommends \
 
 # install npm tools
 curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
-apt -q install -y nodejs npm
+apt -q install -y nodejs
 npm install -g --quiet --no-progress markdownlint-cli
 
 # -------------------------
