@@ -43,7 +43,7 @@ apt -q install -y --no-install-recommends \
     python3.8-dev
 
 # install npm tools
-sudo npm install -g --quiet --no-progress markdownlint-cli
+npm install -g --quiet --no-progress markdownlint-cli
 
 # -------------------------
 # look for user
