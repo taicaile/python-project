@@ -14,7 +14,7 @@ curl -sL https://raw.githubusercontent.com/taicaile/pyproject/master/setup.sh | 
 To initialize development environment in a container,
 
 ```bash
-curl -sL https://raw.githubusercontent.com/taicaile/pyproject/master/dev-init.sh | bash
+curl -sL https://raw.githubusercontent.com/taicaile/pyproject/master/dev-init.sh | sudo bash
 ```
 
 ```text
