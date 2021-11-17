@@ -39,7 +39,9 @@ apt -q install -y --no-install-recommends \
     direnv \
     vim \
     shellcheck \
-    python3.8-dev
+    python3.8-dev \
+    systemd \
+    unzip
 
 # install npm tools
 curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
