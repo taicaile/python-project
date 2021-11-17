@@ -54,8 +54,8 @@ USERNAME_ARRAY=("root")
 if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
     USERNAME=""
     # POSSIBLE_USERS=("$(awk -v val=1000 -F ":" '$3==val{print $1}' /etc/passwd)")
-    POSSIBLE_USERS=("$(grep ":/home/.*:/bin/bash" /etc/passwd | cut -d: -f1 | tr '\r\n' ' ' | awk '{$1=$1};1')")
-    for CURRENT_USER in "${POSSIBLE_USERS[@]}"; do
+    POSSIBLE_USERS=$(grep ":/home/.*:/bin/bash" /etc/passwd | cut -d: -f1 | tr '\r\n' ' ' | awk '{$1=$1};1')
+    for CURRENT_USER in ${POSSIBLE_USERS}; do
         if id -u "${CURRENT_USER}" > /dev/null 2>&1; then
             USERNAME=${CURRENT_USER}
             info "found existing user: $USERNAME"
