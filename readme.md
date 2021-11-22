@@ -11,12 +11,6 @@ To initialize a Python project,
 curl -sL https://raw.githubusercontent.com/taicaile/pyproject/master/setup.sh | bash
 ```
 
-To initialize development environment in a container,
-
-```bash
-curl -sL https://raw.githubusercontent.com/taicaile/pyproject/master/dev-init.sh | sudo bash
-```
-
 ```text
 # dev-init.sh TODO
 - add argument, --upgrade/-U,
