@@ -19,6 +19,11 @@ for program in "${PRE_INSTALLS[@]}"; do
   assert_installed "$program"
 done
 
+# install npm tools
+curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+apt -q install -y nodejs
+npm install -g --quiet --no-progress markdownlint-cli
+
 FILES=(".envrc" ".pre-commit-config.yaml" "pyproject.toml" ".gitignore")
 for FILE in "${FILES[@]}"; do
     if [[ ! -f "$FILE" ]]; then

@@ -26,6 +26,7 @@ apt -q update
 # info "upgrade"
 # apt -qq upgrade -y
 
+# install required packages for development
 # -------------------------
 info "install common libraries"
 apt -q install -y --no-install-recommends \
@@ -38,18 +39,11 @@ apt -q install -y --no-install-recommends \
     neofetch \
     direnv \
     vim \
-    shellcheck \
-    python3.8-dev \
     systemd \
     unzip
 
-# install npm tools
-curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
-apt -q install -y nodejs
-npm install -g --quiet --no-progress markdownlint-cli
-
+# update .bashrc for all users
 # -------------------------
-# look for user
 USERNAME="automatic"
 USERNAME_ARRAY=("root")
 # If in automatic mode, determine if a user already exists
@@ -99,9 +93,15 @@ for USERNAME in "${USERNAME_ARRAY[@]}"; do
     }
 done
 
+
+# ---- Update Timezone ----
 # -------------------------
-info "The following versions of Python are installed in this machine:"
-for p in $(find  /usr/bin/python* | grep -P 'python[\d](.[\d])?+$')
-do
-  info "$p" "$($p --version)"
-done
+CURRENT_TIMEZONE=$(cat /etc/timezone)
+info "Current time zone: $CURRENT_TIMEZONE, local date: $(date)"
+TAEGET_TIMEZONES=("Asia/Brunei" "Asia/Hong_Kong" "Asia/Singapore" "Asia/Manila")
+TAEGET_TIMEZONE=${TAEGET_TIMEZONES[$RANDOM % ${#TAEGET_TIMEZONES[@]} ]}
+
+if [ "$CURRENT_TIMEZONE" != "$TAEGET_TIMEZONE" ]; then
+    echo  "$TAEGET_TIMEZONE" | sudo tee /etc/timezone
+    info "Update timezone to $TAEGET_TIMEZONE, local date: $(date)"
+fi
