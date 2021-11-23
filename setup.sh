@@ -12,6 +12,10 @@ function assert_installed {
     fi
 }
 
+function is_installed {
+    command -v "$1" &>/dev/null
+}
+
 # Check if required programs are installed
 
 PRE_INSTALLS=("direnv" "git" "markdownlint" "shellcheck" "pre-commit")
@@ -19,10 +23,13 @@ for program in "${PRE_INSTALLS[@]}"; do
   assert_installed "$program"
 done
 
-# install npm tools
-curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
-apt -q install -y nodejs
-npm install -g --quiet --no-progress markdownlint-cli
+# # install npm tools
+# MARKDOWNLINT="markdownlint"
+# if ! is_installed $MARKDOWNLINT;then
+#     curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+#     sudo apt -q install -y nodejs
+#     npm install -g --quiet --no-progress markdownlint-cli
+# fi
 
 FILES=(".envrc" ".pre-commit-config.yaml" "pyproject.toml" ".gitignore")
 for FILE in "${FILES[@]}"; do
