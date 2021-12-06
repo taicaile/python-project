@@ -11,22 +11,14 @@ To initialize a Python project,
 curl -sL https://raw.githubusercontent.com/taicaile/pyproject/master/setup.sh | bash
 ```
 
-```text
-# dev-init.sh TODO
-- add argument, --upgrade/-U,
-- add argument, --python 3.8, if install specific Python version
-- add prefix option for bash prompt
+To view a Python project,
+
+```bash
+curl -sL https://raw.githubusercontent.com/taicaile/pyproject/master/view.sh | bash
 ```
 
-To install markdownlint,
+To install `markdownlint`,
 
 ```bash
 sudo npm install -g markdownlint-cli
-```
-
-```text
-# TODO
-
-- config for all users, including root.
-
 ```

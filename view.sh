@@ -18,12 +18,12 @@ function is_installed {
 
 # Check if required programs are installed
 
-PRE_INSTALLS=("direnv" "git" "markdownlint" "shellcheck" "pre-commit")
+PRE_INSTALLS=("direnv")
 for program in "${PRE_INSTALLS[@]}"; do
     assert_installed "$program"
 done
 
-FILES=(".envrc" ".pre-commit-config.yaml" "pyproject.toml" ".gitignore")
+FILES=(".envrc")
 for FILE in "${FILES[@]}"; do
     if [[ ! -f "$FILE" ]]; then
         ENVRC_URL=https://raw.githubusercontent.com/taicaile/pyproject/master/$FILE
@@ -34,13 +34,5 @@ for FILE in "${FILES[@]}"; do
     fi
 done
 
-# init repo
-if [ ! -d .git ]; then
-    git init
-fi
-
 # run direnv
 direnv allow
-
-# pre-commit
-pre-commit install
