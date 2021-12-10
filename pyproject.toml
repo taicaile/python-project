@@ -15,3 +15,6 @@ disable = "fixme"
 
 [tool.pylint.TYPECHECK]
 generated-members = 'numpy.*, torch.*'
+
+[tool.pylint.BASIC]
+good-names = ["i", "j", "k", "e", "_"]
