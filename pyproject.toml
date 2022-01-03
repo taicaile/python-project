@@ -8,13 +8,3 @@ ignore_missing_imports = true
 # isort global options
 [tool.isort]
 profile = "black"
-
-# pylint global options
-[tool.pylint."MESSAGES CONTROL"]
-disable = "fixme"
-
-[tool.pylint.TYPECHECK]
-generated-members = 'numpy.*, torch.*'
-
-[tool.pylint.BASIC]
-good-names = ["i", "j", "k", "e", "_"]

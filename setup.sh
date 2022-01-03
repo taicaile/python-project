@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/bash
 
 # This script is used to setup a local environment for Python3 development
 

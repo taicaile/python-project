@@ -11,10 +11,16 @@ To initialize a Python project,
 curl -sL https://raw.githubusercontent.com/taicaile/pyproject/master/setup.sh | bash
 ```
 
-To view a Python project,
+To install a virtual environment for a Python project,
 
 ```bash
 curl -sL https://raw.githubusercontent.com/taicaile/pyproject/master/view.sh | bash
+```
+
+To install Python3.8,
+
+```bash
+curl -sL https://raw.githubusercontent.com/taicaile/pyproject/master/python3.sh | bash
 ```
 
 To install `markdownlint`,
