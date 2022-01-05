@@ -90,4 +90,5 @@ exclude-protected=_asdict,
                   _fields,
                   _replace,
                   _source,
-                  _make
+                  _make,
+                  _to_dict
