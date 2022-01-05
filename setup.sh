@@ -23,7 +23,7 @@ for program in "${PRE_INSTALLS[@]}"; do
     assert_installed "$program"
 done
 
-FILES=(".envrc" ".pre-commit-config.yaml" "pyproject.toml" ".gitignore")
+FILES=(".envrc" ".pre-commit-config.yaml" "pyproject.toml" ".gitignore" ".pylintrc")
 for FILE in "${FILES[@]}"; do
     if [[ ! -f "$FILE" ]]; then
         ENVRC_URL=https://raw.githubusercontent.com/taicaile/pyproject/master/$FILE
