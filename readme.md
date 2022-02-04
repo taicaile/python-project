@@ -17,7 +17,7 @@ To install a virtual environment for a Python project,
 curl -sL https://raw.githubusercontent.com/taicaile/pyproject/master/view.sh | bash
 ```
 
-To install Python3.8,
+To install Python3,
 
 ```bash
 curl -sL https://raw.githubusercontent.com/taicaile/pyproject/master/python3.sh | bash
@@ -25,6 +25,16 @@ curl -sL https://raw.githubusercontent.com/taicaile/pyproject/master/python3.sh 
 
 To install `markdownlint`,
 
+First, install the `npm` lts version via `nvm`,
+
 ```bash
-sudo npm install -g markdownlint-cli
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+nvm install --lts
+nvm use --lts
+```
+
+Then, install the required package,
+
+```bash
+npm install -g markdownlint-cli
 ```
