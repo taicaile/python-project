@@ -12,10 +12,6 @@ function assert_installed {
     fi
 }
 
-function is_installed {
-    command -v "$1" &>/dev/null
-}
-
 # Check if required programs are installed
 
 PRE_INSTALLS=("direnv" "git" "markdownlint" "shellcheck" "pre-commit")
