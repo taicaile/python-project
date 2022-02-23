@@ -20,7 +20,10 @@ curl -sL https://raw.githubusercontent.com/taicaile/pyproject/master/view.sh | b
 To install Python3,
 
 ```bash
-curl -sL https://raw.githubusercontent.com/taicaile/pyproject/master/python3.sh | bash
+# install the default python3
+curl -sL https://raw.githubusercontent.com/taicaile/pyproject/master/python3.sh | sudo bash
+# specify the python3 version
+curl -sL https://raw.githubusercontent.com/taicaile/pyproject/master/python3.sh | sudo bash -s -- 3.8
 ```
 
 To install `markdownlint`,

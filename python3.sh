@@ -47,12 +47,13 @@ sudo apt -q install -y --no-install-recommends \
   "$PYTHON3_VERSION" \
   "$PYTHON3_VERSION-distutils" \
   "$PYTHON3_VERSION-venv" \
-  "$PYTHON3_VERSION-pip" \
   "$PYTHON3_VERSION-dev"
 
 info "update the python3 symlink"
 sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/"$PYTHON3_VERSION" 1
 sudo update-alternatives --set python3 /usr/bin/"$PYTHON3_VERSION"
+
+sudo apt install python3-pip
 
 # check installled Python version
 # -------------------------
