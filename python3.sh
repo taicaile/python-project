@@ -54,7 +54,7 @@ sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/"$PYTHON3_V
 sudo update-alternatives --set python3 /usr/bin/"$PYTHON3_VERSION"
 
 info "install pip"
-# sudo apt -q install -y --reinstall python3-pip
+sudo apt -q install -y python3-pip
 python3 -m pip install pip wheel setuptools -U
 
 # check installled Python version
