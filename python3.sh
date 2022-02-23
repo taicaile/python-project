@@ -53,7 +53,9 @@ info "update the python3 symlink"
 sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/"$PYTHON3_VERSION" 1
 sudo update-alternatives --set python3 /usr/bin/"$PYTHON3_VERSION"
 
-sudo apt install python3-pip
+info "install pip"
+# sudo apt -q install -y --reinstall python3-pip
+python3 -m pip install pip wheel -U
 
 # check installled Python version
 # -------------------------
