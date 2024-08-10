@@ -13,9 +13,7 @@ __pycache__/
 
 # Environments
 venv/
-
-# mkdocs documentation
-site/
+.venv/
 
 # mypy
 .mypy_cache/
@@ -25,3 +23,6 @@ site/
 
 # Coverage
 .coverage
+
+# pytest
+.pytest_cache
