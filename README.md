@@ -1,5 +1,4 @@
 # README
-<!-- markdownlint-disable line-length -->
 
 This repo is used to initialize an environment for Python project.
 
@@ -41,3 +40,7 @@ Then, install the required package,
 ```bash
 npm install -g markdownlint-cli
 ```
+
+## Development
+
+Python package manager: `uv`
